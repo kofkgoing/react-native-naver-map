@@ -70,7 +70,16 @@ RCT_CUSTOM_VIEW_PROPERTY(subCaption, NSDictionary, RNNaverMapMarker)
   [view setSubCaptionMaxZoom:maxZoom];
 }
 
-
+RCT_CUSTOM_VIEW_PROPERTY(info, NSDictionary, RNNaverMapMarker)
+{
+  NSDictionary *dic = [RCTConvert NSDictionary:json];
+  NSString *text = [RCTConvert NSString:dic[@"text"]];
+  if (!text || [text length] <= 0) return
+      
+  BOOL *visible = [RCTConvert NSString:dic[@"text"]];
+    
+  [view setInfoWindowText: text];
+}
 
 RCT_EXPORT_VIEW_PROPERTY(coordinate, NMGLatLng)
 RCT_EXPORT_VIEW_PROPERTY(width, CGFloat)

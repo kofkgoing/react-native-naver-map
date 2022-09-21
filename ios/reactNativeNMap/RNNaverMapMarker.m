@@ -179,6 +179,35 @@
    _realMarker.subCaptionMaxZoom = subMaxZoom;
 }
 
+/**
+ _realMarker = [NMFMarker new];
+
+ __block RNNaverMapMarker *this = self;
+ */
+
+- (NMFInfoWindow *)createInfoWindow:(NSString *) text {
+    if (_realInfoWindow) {
+        _realInfoWindow = [NMFInfoWindow new];
+        NMFInfoWindowDefaultTextSource *dataSource = [NMFInfoWindowDefaultTextSource dataSource];
+        dataSource.title = text;
+        
+        _realInfoWindow.dataSource = dataSource;
+
+    } else {
+        _realInfoWindow.dataSourc.title = text;
+    }
+    
+        
+    return _realInfoWindow
+}
+- (void)setInfoWindowText:(NSString *) text {
+    [self createInfoWindow: text]
+    
+    if (!_isInfoWIndowVisible) return
+        
+    [_realInfoWindow openWithMarker: _realMarker]
+}
+
 - (void)setImage:(NSString *) image
 {
   _image = image;
